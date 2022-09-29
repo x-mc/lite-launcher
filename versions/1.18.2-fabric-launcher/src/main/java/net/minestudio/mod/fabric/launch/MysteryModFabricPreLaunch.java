@@ -30,7 +30,7 @@ public class MysteryModFabricPreLaunch implements PreLaunchEntrypoint {
     }
   }
 
-  private static final LaunchVersion LAUNCH_VERSION = LaunchVersion.MC_1_16_5;
+  private static final LaunchVersion LAUNCH_VERSION = LaunchVersion.MC_1_18_2;
   private static final LaunchEnvironment LAUNCH_ENVIRONMENT = LaunchEnvironment.FABRIC;
 
   private LaunchService createLaunchService() {
@@ -44,7 +44,7 @@ public class MysteryModFabricPreLaunch implements PreLaunchEntrypoint {
     try {
       Method addURL = targetClassLoader.getClass().getDeclaredMethod("addUrlFwd", URL.class);
       addURL.setAccessible(true);
-      File file = new File("MysteryMod/internal/1.16.5-fabric.jar");
+      File file = new File("MysteryMod/internal/1.18.2-fabric.jar");
       URL url = new URL("file", "", URIHelper.slashify(file.getAbsolutePath(), file.isDirectory()));
       addURL.invoke(targetClassLoader, url);
     } catch (IllegalAccessException | InvocationTargetException |

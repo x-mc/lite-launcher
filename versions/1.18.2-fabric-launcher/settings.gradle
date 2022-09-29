@@ -11,5 +11,5 @@ pluginManagement {
 
 rootProject.name = '1.18.2-fabric-launcher'
 
-include 'launcher'
-project(':launcher').projectDir = file('../../launcher')
+include 'common'
+project(':common').projectDir = file('../../common')
