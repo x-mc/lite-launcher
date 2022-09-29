@@ -1,22 +1,17 @@
 package net.minestudio.launcher.mod;
 
-import lombok.*;
-
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class ModId {
-  private String modId;
+  private final long modId;
 
-  public static ModId of(String name) {
-    return new ModId(name);
+  private ModId(long modId) {
+    this.modId = modId;
   }
 
-  private static final String UNKNOWN = "unknown";
+  public long modId() {
+    return modId;
+  }
 
-  public static ModId unknown() {
-    return new ModId(UNKNOWN);
+  public static ModId of(long modId) {
+    return new ModId(modId);
   }
 }

@@ -1,5 +1,5 @@
 package net.minestudio.launcher.mod.menu;
 
-public enum MenuPlayerState {
+public enum PlayerVisibilityState {
   ACTIVE, DISABLED
 }
