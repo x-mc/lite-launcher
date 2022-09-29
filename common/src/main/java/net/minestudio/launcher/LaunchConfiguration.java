@@ -1,13 +1,21 @@
 package net.minestudio.launcher;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
-@Getter
-@RequiredArgsConstructor
 public class LaunchConfiguration {
   private final LaunchVersion version;
   private final LaunchEnvironment environment;
+
+  public LaunchConfiguration(LaunchVersion version, LaunchEnvironment environment) {
+    this.version = version;
+    this.environment = environment;
+  }
+
+  public LaunchVersion getVersion() {
+    return version;
+  }
+
+  public LaunchEnvironment getEnvironment() {
+    return environment;
+  }
 
   public boolean isForge() {
     return environment.equals(LaunchEnvironment.FORGE);

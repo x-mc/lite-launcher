@@ -1,9 +1,15 @@
 package net.minestudio.launcher.version;
 
-import lombok.*;
 
-@Getter
 public class VersionInfoResponse {
   private boolean successful;
   private VersionInfo info;
+
+  public boolean isSuccessful() {
+    return successful;
+  }
+
+  public VersionInfo getInfo() {
+    return info;
+  }
 }
