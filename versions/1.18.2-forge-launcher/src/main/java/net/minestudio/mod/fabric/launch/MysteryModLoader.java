@@ -1,12 +1,12 @@
-package net.mysterymod.mod.fabric.launch;
+package net.minestudio.mod.fabric.launch;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.loading.moddiscovery.AbstractJarFileModLocator;
 import net.minecraftforge.forgespi.locating.IModLocator;
-import net.mysterymod.mod.launcher.LaunchConfiguration;
-import net.mysterymod.mod.launcher.LaunchEnvironment;
-import net.mysterymod.mod.launcher.LaunchService;
-import net.mysterymod.mod.launcher.LaunchVersion;
+import net.minestudio.launcher.LaunchConfiguration;
+import net.minestudio.launcher.LaunchEnvironment;
+import net.minestudio.launcher.LaunchService;
+import net.minestudio.launcher.LaunchVersion;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -39,6 +39,4 @@ public class MysteryModLoader extends AbstractJarFileModLocator implements IModL
   @Override
   public void initArguments(Map<String, ?> arguments) {
   }
-
-
 }

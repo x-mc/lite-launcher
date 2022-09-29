@@ -22,40 +22,13 @@ processResources {
 jar.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
 repositories {
-
   maven {
     name = 'sponge'
     url = 'https://repo.spongepowered.org/maven'
   }
-  maven {
-    name = "mysterymod-repository"
-    url = uri("https://nexus.mysterymod.dev/repository/maven-releases/")
-    credentials {
-      username = project.findProperty("nexus.user") ?: System.getenv("NEXUS_USER")
-      password = project.findProperty("nexus.password") ?: System.getenv("NEXUS_PASSWORD")
-    }
-  }
-  maven {
-    name = "mysterymod-internal-repository"
-    url = uri("https://nexus.mysterymod.dev/repository/mysterymod-internal/")
-    credentials {
-      username = project.findProperty("nexus.user") ?: System.getenv("NEXUS_USER")
-      password = project.findProperty("nexus.password") ?: System.getenv("NEXUS_PASSWORD")
-    }
-  }
-  maven {
-    name = "mysterymod-internal-repository"
-    url = uri("https://nexus.mysterymod.dev/repository/mysterymod-public/")
-    credentials {
-      username = project.findProperty("nexus.user") ?: System.getenv("NEXUS_USER")
-      password = project.findProperty("nexus.password") ?: System.getenv("NEXUS_PASSWORD")
-    }
-  }
 }
 
 dependencies {
-
-  // To change the versions see the gradle.properties file
   minecraft "com.mojang:minecraft:${project.minecraft_version}"
   mappings loom.officialMojangMappings()
   modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
@@ -63,14 +36,9 @@ dependencies {
 
   compileOnly 'org.projectlombok:lombok:1.18.22'
   annotationProcessor 'org.projectlombok:lombok:1.18.22'
-  implementation project(':launcher')
-  // Fabric API. This is technically optional, but you probably want it anyway.
-  modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-
-  embed project(':launcher')
-
-
+  implementation project(':common')
+  embed project(':common')
 }
 
 processResources {
@@ -90,7 +58,6 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 java {
-
   withSourcesJar()
 }
 
@@ -107,25 +74,3 @@ jar {
   }
 
 }
-
-publishing {
-  publications {
-    mavenJava(MavenPublication) {
-      from components.java
-    }
-  }
-
-  repositories {
-
-  }
-}
-
-project.tasks.named("processResources") {
-  duplicatesStrategy = 'exclude'
-
-}
-project.tasks.named("sourcesJar") {
-  duplicatesStrategy = 'exclude'
-
-}
-

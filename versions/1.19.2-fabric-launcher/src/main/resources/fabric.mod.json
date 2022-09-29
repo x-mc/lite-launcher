@@ -14,7 +14,7 @@
   "icon": "icon.png",
   "entrypoints": {
     "preLaunch": [
-      "net.mysterymod.mod.fabric.launch.MysteryModFabricPreLaunch"
+      "net.minestudio.mod.fabric.launch.MysteryModFabricPreLaunch"
     ]
   },
   "depends": {
