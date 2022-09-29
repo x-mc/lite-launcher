@@ -1,0 +1,131 @@
+plugins {
+  id 'fabric-loom' version '0.11-SNAPSHOT'
+  id 'maven-publish'
+  id 'java'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
+
+configurations {
+  embed
+  compile.extendsFrom embed
+}
+
+processResources {
+  duplicatesStrategy = 'INCLUDE'
+}
+jar.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+repositories {
+
+  maven {
+    name = 'sponge'
+    url = 'https://repo.spongepowered.org/maven'
+  }
+  maven {
+    name = "mysterymod-repository"
+    url = uri("https://nexus.mysterymod.dev/repository/maven-releases/")
+    credentials {
+      username = project.findProperty("nexus.user") ?: System.getenv("NEXUS_USER")
+      password = project.findProperty("nexus.password") ?: System.getenv("NEXUS_PASSWORD")
+    }
+  }
+  maven {
+    name = "mysterymod-internal-repository"
+    url = uri("https://nexus.mysterymod.dev/repository/mysterymod-internal/")
+    credentials {
+      username = project.findProperty("nexus.user") ?: System.getenv("NEXUS_USER")
+      password = project.findProperty("nexus.password") ?: System.getenv("NEXUS_PASSWORD")
+    }
+  }
+  maven {
+    name = "mysterymod-internal-repository"
+    url = uri("https://nexus.mysterymod.dev/repository/mysterymod-public/")
+    credentials {
+      username = project.findProperty("nexus.user") ?: System.getenv("NEXUS_USER")
+      password = project.findProperty("nexus.password") ?: System.getenv("NEXUS_PASSWORD")
+    }
+  }
+}
+
+dependencies {
+
+  // To change the versions see the gradle.properties file
+  minecraft "com.mojang:minecraft:${project.minecraft_version}"
+  mappings loom.officialMojangMappings()
+  modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+  modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+  compileOnly 'org.projectlombok:lombok:1.18.22'
+  annotationProcessor 'org.projectlombok:lombok:1.18.22'
+  implementation project(':launcher')
+  // Fabric API. This is technically optional, but you probably want it anyway.
+  modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+
+  embed project(':launcher')
+
+
+}
+
+processResources {
+  inputs.property "version", project.version
+
+  filesMatching("fabric.mod.json") {
+    expand "version": project.version
+  }
+}
+
+tasks.withType(Copy).all {
+  duplicatesStrategy 'exclude'
+}
+
+tasks.withType(JavaCompile).configureEach {
+  it.options.release = 17
+}
+
+java {
+
+  withSourcesJar()
+}
+
+jar {
+  from("LICENSE") {
+    rename { "${it}_${project.archivesBaseName}" }
+  }
+
+  from {
+    duplicatesStrategy DuplicatesStrategy.EXCLUDE
+    configurations.embed.collect {
+      it.isDirectory() ? it : zipTree(it)
+    }
+  }
+
+}
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+    }
+  }
+
+  repositories {
+
+  }
+}
+
+project.tasks.named("processResources") {
+  duplicatesStrategy = 'exclude'
+
+}
+project.tasks.named("sourcesJar") {
+  duplicatesStrategy = 'exclude'
+
+}
+

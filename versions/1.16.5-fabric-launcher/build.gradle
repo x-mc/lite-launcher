@@ -1,0 +1,69 @@
+plugins {
+  id 'fabric-loom' version '0.6-SNAPSHOT'
+  id 'maven-publish'
+  id 'java'
+}
+
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
+
+configurations {
+  embed
+  compile.extendsFrom embed
+}
+
+repositories {
+  maven {
+    name = 'sponge'
+    url = 'https://repo.spongepowered.org/maven'
+  }
+}
+
+dependencies {
+  // To change the versions see the gradle.properties file
+  minecraft "com.mojang:minecraft:${project.minecraft_version}"
+  mappings loom.officialMojangMappings()
+
+  modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+  implementation project(':common')
+  embed project(':common')
+
+  compileOnly 'org.projectlombok:lombok:1.18.22'
+  annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+  // Fabric API. This is technically optional, but you probably want it anyway.
+  modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+processResources {
+  inputs.property "version", project.version
+
+  filesMatching("fabric.mod.json") {
+    expand "version": project.version
+  }
+}
+
+tasks.withType(Copy).all {
+  duplicatesStrategy 'exclude'
+}
+
+
+java {
+  withSourcesJar()
+}
+
+jar {
+  from("LICENSE") {
+    rename { "${it}_${project.archivesBaseName}" }
+  }
+
+  from {
+    duplicatesStrategy DuplicatesStrategy.EXCLUDE
+    configurations.embed.collect {
+      it.isDirectory() ? it : zipTree(it)
+    }
+  }
+}
+

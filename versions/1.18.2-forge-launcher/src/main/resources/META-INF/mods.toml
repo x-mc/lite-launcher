@@ -1,0 +1,15 @@
+modLoader="javafml"
+loaderVersion="[39,)"
+license="GPLv3"
+
+[[mods]]
+modId="mysterymodloader"
+version="7.0.0-pre29"
+displayName="MysteryMod Loader"
+updateJSONURL="https://mrcrayfish.com/modupdatejson?id=cfm"
+displayURL="https://mrcrayfish.com/mods?id=cfm"
+logoFile="furniture.png"
+credits="The people who helped me when I first started creating mods. I wouldn't be here without them!"
+authors="MrCrayfish"
+description="MrCrayfish's Furniture Mod is all about adding functioning furniture and decorations. This mod currently adds over eighty unique blocks and is continuely growing with new updates."
+

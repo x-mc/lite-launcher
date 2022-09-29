@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "mysterymod",
+  "version": "${version}",
+  "name": "MysteryMod",
+  "description": "A cosmetic mod to customize yourself with more than 500 Cosmetics, Emotes, Cloaks, Wings, Stickers & more!",
+  "authors": [
+    "MineStudio GmbH"
+  ],
+  "contact": {
+    "homepage": "https://mysterymod.net"
+  },
+  "environment": "client",
+  "icon": "icon.png",
+  "entrypoints": {
+    "preLaunch": [
+      "net.minestudio.mod.fabric.launch.MysteryModFabricPreLaunch"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.13.3"
+  },
+  "custom": {
+    "mysterymod": {
+      "links": {
+        "mysterymod.discord": "https://discord.gg/jEGF5fb"
+      }
+    }
+  }
+}
