@@ -1,0 +1,14 @@
+pluginManagement {
+  repositories {
+    gradlePluginPortal()
+    maven { url = 'https://maven.minecraftforge.net/' }
+
+  }
+
+
+}
+
+rootProject.name = '1.19.2-forge-launcher'
+
+include 'common'
+project(':common').projectDir = file('../../common')

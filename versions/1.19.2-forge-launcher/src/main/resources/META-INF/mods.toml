@@ -6,3 +6,5 @@ license="GPLv3"
 modId="mysterymodloader"
 version="7.0.0-pre29"
 displayName="MysteryMod Loader"
+logoFile="furniture.png"
+
