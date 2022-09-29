@@ -5,6 +5,9 @@ The Lite Launcher downloads the same version as CurseForge:
 [Visit CurseForge Page](https://www.curseforge.com/minecraft/mc-mods/mysterylite).
 
 
+Questions? Feel free to visit our Discord server or write me directly via Discord under Manuel#1335.
+[Join Discord](https://discord.gg/RXq56TTPYE).
+
 ## Compatibility
 We are compatible with the following versions & environments:
 
